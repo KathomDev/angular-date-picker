@@ -1,0 +1,111 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+$kt-date-picker-cell-font-size : 0.8em;
+$kt-date-picker-cell-padding   : 0.25rem;
+$kt-date-picker-cell-size      : 3rem;
+
+$kt-date-picker-month-font-size         : 1em;
+$kt-date-picker-previous-next-font-size : 0.8em;
+
+$kt-date-picker-active-date-color      : #FFFFFF;
+$kt-date-picker-active-date-background : #3F51B5;
+
+$kt-black : #222;
+
+.kt-muted {
+  color : rgba(black, 0.3);
+}
+
+kt-date-picker {
+  display: block;
+  width: 20rem;
+
+  button {
+    background  : transparent;
+    border      : none;
+    cursor      : pointer;
+    color       : $kt-black;
+    font-family : 'Roboto', sans-serif;
+    padding     : 0;
+  }
+
+  .kt-date-picker-header {
+    display       : table;
+    width         : 100%;
+    font-family   : 'Roboto', sans-serif;
+    margin-bottom : 0.5rem;
+
+    button {
+      display: table-cell;
+      vertical-align: middle;
+    }
+
+    button:first-of-type, button:last-of-type {
+      width     : 20%;
+      font-size : $kt-date-picker-previous-next-font-size;
+    }
+
+    button:nth-of-type(2) {
+      width     : 60%;
+      font-size : $kt-date-picker-month-font-size;
+    }
+  }
+
+  .kt-date-picker-row {
+    display: table;
+    width: 100%;
+  }
+
+  .kt-date-picker-cell {
+    display        : table-cell;
+    box-sizing     : border-box;
+    padding        : $kt-date-picker-cell-padding;
+    height         : $kt-date-picker-cell-size;
+    width          : $kt-date-picker-cell-size;
+    font-size      : $kt-date-picker-cell-font-size;
+    font-family    : 'Roboto', sans-serif;
+    text-align     : center;
+    vertical-align : middle;
+  }
+
+  .kt-date-picker-day {
+    @extend .kt-date-picker-cell;
+    @extend .kt-muted;
+    margin-bottom: 0.5rem;
+  }
+
+  .kt-date-picker-date {
+    @extend .kt-date-picker-cell;
+
+    button {
+      position : relative;
+      width    : 100%;
+      height   : 100%;
+
+      &::after {
+        content       : "";
+        height        : $kt-date-picker-cell-size - (2 * $kt-date-picker-cell-padding);
+        width         : $kt-date-picker-cell-size - (2 * $kt-date-picker-cell-padding);
+        border-radius : 50%;
+        background    : transparent;
+        position      : absolute;
+        left          : 50%;
+        top           : 0;
+        z-index       : -1;
+        transform     : translateX(-50%);
+      }
+    }
+  }
+
+  .kt-date-picker-date.selected-date button {
+    color : $kt-date-picker-active-date-color;
+
+    &::after {
+      background : $kt-date-picker-active-date-background;
+    }
+  }
+
+  .kt-date-picker-date.overflowing-date {
+    opacity : 0.2;
+  }
+}

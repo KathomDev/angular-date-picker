@@ -1,0 +1,21 @@
+<div>
+  <div class="kt-date-picker-header">
+    <button ng-click="previousMonth()">Previous Month</button>
+    <button>{{calendar.month | monthFormat}} {{calendar.year}}</button>
+    <button ng-click="nextMonth()">Next Month</button>
+  </div>
+  <div class="kt-date-picker-row">
+    <div class="kt-date-picker-day" ng-repeat="dayHeader in calendar.dayHeaders">
+      {{dayHeader}}
+    </div>
+  </div>
+  <div class="kt-date-picker-row" ng-repeat="week in calendar.weeks">
+    <div class="kt-date-picker-date"
+         ng-repeat="date in week.dates"
+         ng-class="{'selected-date': isSelected(date), 'overflowing-date': isOverflowing(date)}">
+      <button ng-click="selectDate(date)">
+        {{date.format('D')}}
+      </button>
+    </div>
+  </div>
+</div>
