@@ -100,7 +100,6 @@
             date.subtract(1, 'months');
             scope.calendar.month = date.month();
             scope.calendar.year = date.year();
-            scope.calendar.weeks.length = 0;
             scope.calendar.weeks = service.getWeeksInMonth(scope.calendar.year, scope.calendar.month);
           };
 
@@ -109,7 +108,6 @@
             date.add(1, 'months');
             scope.calendar.month = date.month();
             scope.calendar.year = date.year();
-            scope.calendar.weeks.length = 0;
             scope.calendar.weeks = service.getWeeksInMonth(scope.calendar.year, scope.calendar.month);
           };
 
