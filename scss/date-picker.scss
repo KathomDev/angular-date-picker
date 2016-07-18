@@ -1,5 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
+$kt-date-picker-width : 28rem;
+
 $kt-date-picker-cell-font-size : 0.8em;
 $kt-date-picker-cell-padding   : 0.25rem;
 $kt-date-picker-cell-size      : 3rem;
@@ -18,7 +20,7 @@ $kt-black : #222;
 
 kt-date-picker {
   display: block;
-  width: 20rem;
+  width: $kt-date-picker-width;
 
   button {
     background  : transparent;
@@ -59,7 +61,6 @@ kt-date-picker {
   .kt-date-picker-cell {
     display        : table-cell;
     box-sizing     : border-box;
-    padding        : $kt-date-picker-cell-padding;
     height         : $kt-date-picker-cell-size;
     width          : $kt-date-picker-cell-size;
     font-size      : $kt-date-picker-cell-font-size;
@@ -90,7 +91,7 @@ kt-date-picker {
         background    : transparent;
         position      : absolute;
         left          : 50%;
-        top           : 0;
+        top           : $kt-date-picker-cell-padding;
         z-index       : -1;
         transform     : translateX(-50%);
       }
