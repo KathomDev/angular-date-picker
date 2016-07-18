@@ -1,12 +1,15 @@
 module.exports = function(grunt) {
 
+  var Promise = require('es6-promise').Promise;
+
   // Project configuration.
   grunt.initConfig({
     sass: {
+      options: {
+        outputStyle: 'expanded',
+        sourceMap  : true
+      },
       dist: {
-        options: {
-          style: 'expanded'
-        },
         files: {
           'css/date-picker.css': 'scss/date-picker.scss'
         }
@@ -17,7 +20,6 @@ module.exports = function(grunt) {
         map: {
           inline: true
         },
-
         processors: [
           require('autoprefixer')({browsers: 'last 3 versions'})
         ]
@@ -27,8 +29,7 @@ module.exports = function(grunt) {
       }
     }
   });
-
-  grunt.loadNpmTasks('grunt-contrib-sass');
+  grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-postcss');
 
   grunt.registerTask('default', ['sass', 'postcss']);
