@@ -27,10 +27,21 @@ module.exports = function(grunt) {
       dist: {
         src: 'css/**/*.css'
       }
+    },
+    watch: {
+      css: {
+        files: [
+          'scss/**/*.scss'
+        ],
+        tasks: ['build-css']
+      }
     }
   });
+
   grunt.loadNpmTasks('grunt-sass');
   grunt.loadNpmTasks('grunt-postcss');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
-  grunt.registerTask('default', ['sass', 'postcss']);
+  grunt.registerTask('build-css', ['sass', 'postcss']);
+  grunt.registerTask('default', ['watch']);
 };
