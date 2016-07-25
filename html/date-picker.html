@@ -1,8 +1,12 @@
 <div>
+  <input type="text"
+         ng-model="$parent.dateString"
+         ng-change="dateStringChanged(dateString)"
+         ng-if="options && options.dateInput && options.dateInput.enabled">
   <div class="kt-date-picker-header">
-    <button ng-click="previousMonth()">Previous Month</button>
-    <button>{{calendar.month | monthFormat}} {{calendar.year}}</button>
-    <button ng-click="nextMonth()">Next Month</button>
+    <button type="button" ng-click="previousMonth()">Previous Month</button>
+    <button type="button">{{calendar.month | monthFormat}} {{calendar.year}}</button>
+    <button type="button" ng-click="nextMonth()">Next Month</button>
   </div>
   <div class="kt-date-picker-row">
     <div class="kt-date-picker-day" ng-repeat="dayHeader in calendar.dayHeaders">
@@ -13,7 +17,7 @@
     <div class="kt-date-picker-date"
          ng-repeat="date in week.dates"
          ng-class="{'selected-date': isSelected(date), 'overflowing-date': isOverflowing(date)}">
-      <button ng-click="selectDate(date)">
+      <button type="button" ng-click="selectDate(date)">
         {{date.format('D')}}
       </button>
     </div>

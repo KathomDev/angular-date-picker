@@ -81,34 +81,55 @@
         restrict: 'E',
         templateUrl: 'html/date-picker.html',
         scope: {
-          date: '='
+          date: '=',
+          options: '='
         },
         link: function (scope) {
           scope.calendar = {
-            month: scope.date.month(),
-            year: scope.date.year(),
-            weeks: service.getWeeksInMonth(scope.date.year(), scope.date.month()),
             dayHeaders: service.getDayHeaders()
           };
 
+          scope.$watch('date', function (date) {
+            if (!date) {
+              return;
+            }
+            scope.date = date || moment();
+            resetCalendar(scope.date);
+
+            if (!scope.options) {
+              return;
+            }
+
+            if (scope.options.dateInput && scope.options.dateInput.enabled && scope.options.dateInput.format) {
+              scope.dateString = date.format(scope.options.dateInput.format);
+            }
+          });
+
+          scope.dateStringChanged = function (dateString) {
+            if (moment(dateString, scope.options.dateInput.format, true).isValid()) {
+              var date = moment(dateString, scope.options.dateInput.format);
+              scope.date = scope.options.resetTime
+                ? date
+                : scope.date.clone().year(date.year()).month(date.month()).date(date.date());
+            }
+          };
+
           scope.selectDate = function (date) {
-            scope.date = date;
+            scope.date = scope.options.resetTime
+              ? date
+              : scope.date.clone().year(date.year()).month(date.month()).date(date.date());
           };
 
           scope.previousMonth = function () {
             var date = moment({year: scope.calendar.year, month: scope.calendar.month});
             date.subtract(1, 'months');
-            scope.calendar.month = date.month();
-            scope.calendar.year = date.year();
-            scope.calendar.weeks = service.getWeeksInMonth(scope.calendar.year, scope.calendar.month);
+            resetCalendar(date);
           };
 
           scope.nextMonth = function () {
             var date = moment({year: scope.calendar.year, month: scope.calendar.month});
             date.add(1, 'months');
-            scope.calendar.month = date.month();
-            scope.calendar.year = date.year();
-            scope.calendar.weeks = service.getWeeksInMonth(scope.calendar.year, scope.calendar.month);
+            resetCalendar(date);
           };
 
           scope.isSelected = function (date) {
@@ -120,6 +141,12 @@
           scope.isOverflowing = function (date) {
             return date.month() !== scope.calendar.month;
           };
+
+          function resetCalendar(date) {
+            scope.calendar.month = date.month();
+            scope.calendar.year = date.year();
+            scope.calendar.weeks = service.getWeeksInMonth(date.year(), date.month());
+          }
         }
       };
     }]);
