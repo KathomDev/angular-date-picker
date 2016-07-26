@@ -11,7 +11,8 @@ module.exports = function(grunt) {
       },
       dist: {
         files: {
-          'css/date-picker.css': 'scss/date-picker.scss'
+          'css/date-picker.css': 'scss/date-picker.scss',
+          'app/css/app.css': 'app/scss/app.scss'
         }
       }
     },
@@ -31,7 +32,8 @@ module.exports = function(grunt) {
     watch: {
       css: {
         files: [
-          'scss/**/*.scss'
+          'scss/**/*.scss',
+          'app/scss/**/*.scss'
         ],
         tasks: ['build-css']
       }

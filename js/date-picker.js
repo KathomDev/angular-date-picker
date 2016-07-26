@@ -76,51 +76,48 @@
       return service;
     }])
 
-    .directive('ktDatePicker', ['ktDatePickerSvc', function (service) {
+    .directive('ktDatePicker', [function () {
       return {
         restrict: 'E',
-        templateUrl: 'html/date-picker.html',
         scope: {
           date: '='
         },
-        link: function (scope) {
-          scope.calendar = {
-            month: scope.date.month(),
-            year: scope.date.year(),
-            weeks: service.getWeeksInMonth(scope.date.year(), scope.date.month()),
-            dayHeaders: service.getDayHeaders()
+        template:
+        '<kt-day-picker date="date" ng-if="isCurrentPicker(\'day\')"></kt-day-picker>' +
+        '<kt-month-picker date="date" ng-if="isCurrentPicker(\'month\')"></kt-month-picker>' +
+        '<kt-year-picker date="date" ng-if="isCurrentPicker(\'year\')"></kt-year-picker> ',
+        link: function (scope, element) {
+          scope.element = element;
+          var currentPicker = 'day';
+
+          scope.setCurrentPicker = function (picker) {
+            currentPicker = picker;
           };
 
-          scope.selectDate = function (date) {
-            scope.date = date;
+          scope.isCurrentPicker = function (picker) {
+            return currentPicker === picker;
           };
 
-          scope.previousMonth = function () {
-            var date = moment({year: scope.calendar.year, month: scope.calendar.month});
-            date.subtract(1, 'months');
-            scope.calendar.month = date.month();
-            scope.calendar.year = date.year();
-            scope.calendar.weeks = service.getWeeksInMonth(scope.calendar.year, scope.calendar.month);
-          };
+          scope.$on('dayPicker:monthClick', function (ev) {
+            currentPicker = 'month';
+            ev.stopPropagation();
+          });
 
-          scope.nextMonth = function () {
-            var date = moment({year: scope.calendar.year, month: scope.calendar.month});
-            date.add(1, 'months');
-            scope.calendar.month = date.month();
-            scope.calendar.year = date.year();
-            scope.calendar.weeks = service.getWeeksInMonth(scope.calendar.year, scope.calendar.month);
-          };
+          scope.$on('monthPicker:monthSelect', function (ev) {
+            currentPicker = 'day';
+            ev.stopPropagation();
+          });
 
-          scope.isSelected = function (date) {
-            return date.year() === scope.date.year()
-              && date.month() === scope.date.month()
-              && date.date() === scope.date.date();
-          };
+          scope.$on('yearPicker:yearSelect', function (ev) {
+            currentPicker = 'month';
+            ev.stopPropagation();
+          });
 
-          scope.isOverflowing = function (date) {
-            return date.month() !== scope.calendar.month;
-          };
+          scope.$on('monthPicker:yearClick', function (ev) {
+            currentPicker = 'year';
+            ev.stopPropagation();
+          });
         }
-      };
+      }
     }]);
 })();
