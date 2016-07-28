@@ -9,7 +9,7 @@
         <div class="kt-time-picker-cell"
              ng-repeat="hour in timePicker.hours"
              ng-class="{'kt-date-picker-selected': isHourSelected(hour)}">
-          <button ng-click="selectHour(hour)">{{hour}}</button>
+          <button type="button" ng-click="selectHour(hour)">{{hour}}</button>
         </div>
       </div>
     </div>
@@ -18,7 +18,7 @@
         <div class="kt-time-picker-cell"
              ng-repeat="minute in timePicker.minutes"
              ng-class="{'kt-date-picker-selected': isMinuteSelected(minute)}">
-          <button ng-click="selectMinute(minute)">{{minute}}</button>
+          <button type="button" ng-click="selectMinute(minute)">{{minute}}</button>
         </div>
       </div>
     </div>

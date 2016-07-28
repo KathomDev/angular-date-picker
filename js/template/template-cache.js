@@ -2,9 +2,9 @@ angular.module('kt.components.datePicker').run(['$templateCache', function($temp
   $templateCache.put("kt-day-picker.html",
     "<div>\n" +
     "  <div class=\"kt-date-picker-header\">\n" +
-    "    <button ng-click=\"previousMonth()\">Previous Month</button>\n" +
-    "    <button ng-click=\"monthClick()\">{{dayPicker.month | monthFormat}} {{dayPicker.year}}</button>\n" +
-    "    <button ng-click=\"nextMonth()\">Next Month</button>\n" +
+    "    <button type=\"button\" ng-click=\"previousMonth()\">Previous Month</button>\n" +
+    "    <button type=\"button\" ng-click=\"monthClick()\">{{dayPicker.month | monthFormat}} {{dayPicker.year}}</button>\n" +
+    "    <button type=\"button\" ng-click=\"nextMonth()\">Next Month</button>\n" +
     "  </div>\n" +
     "  <div class=\"kt-date-picker-content\">\n" +
     "    <div class=\"kt-day-picker-row\">\n" +
@@ -16,7 +16,7 @@ angular.module('kt.components.datePicker').run(['$templateCache', function($temp
     "      <div class=\"kt-day-picker-cell\"\n" +
     "           ng-repeat=\"date in week.dates\"\n" +
     "           ng-class=\"{'kt-date-picker-selected': isSelected(date), 'kt-date-picker-overflow': isOverflowing(date)}\">\n" +
-    "        <button ng-click=\"selectDate(date)\">\n" +
+    "        <button type=\"button\" ng-click=\"selectDate(date)\">\n" +
     "          {{date.format('D')}}\n" +
     "        </button>\n" +
     "      </div>\n" +
@@ -28,15 +28,15 @@ angular.module('kt.components.datePicker').run(['$templateCache', function($temp
   $templateCache.put("kt-month-picker.html",
     "<div>\n" +
     "  <div class=\"kt-date-picker-header\">\n" +
-    "    <button ng-click=\"previousYear()\">Previous Year</button>\n" +
-    "    <button ng-click=\"yearClick()\">{{monthPicker.year}}</button>\n" +
-    "    <button ng-click=\"nextYear()\">Next Year</button>\n" +
+    "    <button type=\"button\" ng-click=\"previousYear()\">Previous Year</button>\n" +
+    "    <button type=\"button\" ng-click=\"yearClick()\">{{monthPicker.year}}</button>\n" +
+    "    <button type=\"button\" ng-click=\"nextYear()\">Next Year</button>\n" +
     "  </div>\n" +
     "  <div class=\"kt-date-picker-content\">\n" +
     "    <div class=\"kt-month-picker-cell\"\n" +
     "         ng-repeat=\"month in monthPicker.months\"\n" +
     "         ng-class=\"{'kt-date-picker-selected': isSelected(month)}\">\n" +
-    "      <button ng-click=\"selectMonth(month)\">{{month | monthFormat}}</button>\n" +
+    "      <button type=\"button\" ng-click=\"selectMonth(month)\">{{month | monthFormat}}</button>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <div class=\"kt-date-picker-footer\"></div>\n" +
@@ -54,7 +54,7 @@ angular.module('kt.components.datePicker').run(['$templateCache', function($temp
     "        <div class=\"kt-time-picker-cell\"\n" +
     "             ng-repeat=\"hour in timePicker.hours\"\n" +
     "             ng-class=\"{'kt-date-picker-selected': isHourSelected(hour)}\">\n" +
-    "          <button ng-click=\"selectHour(hour)\">{{hour}}</button>\n" +
+    "          <button type=\"button\" ng-click=\"selectHour(hour)\">{{hour}}</button>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
@@ -63,7 +63,7 @@ angular.module('kt.components.datePicker').run(['$templateCache', function($temp
     "        <div class=\"kt-time-picker-cell\"\n" +
     "             ng-repeat=\"minute in timePicker.minutes\"\n" +
     "             ng-class=\"{'kt-date-picker-selected': isMinuteSelected(minute)}\">\n" +
-    "          <button ng-click=\"selectMinute(minute)\">{{minute}}</button>\n" +
+    "          <button type=\"button\" ng-click=\"selectMinute(minute)\">{{minute}}</button>\n" +
     "        </div>\n" +
     "      </div>\n" +
     "    </div>\n" +
@@ -74,15 +74,15 @@ angular.module('kt.components.datePicker').run(['$templateCache', function($temp
   $templateCache.put("kt-year-picker.html",
     "<div>\n" +
     "  <div class=\"kt-date-picker-header\">\n" +
-    "    <button ng-click=\"previousDecade()\">Previous Decade</button>\n" +
-    "    <button disabled=\"disabled\">{{yearPicker.decade.start}} - {{yearPicker.decade.end}}</button>\n" +
-    "    <button ng-click=\"nextDecade()\">Next Decade</button>\n" +
+    "    <button type=\"button\" ng-click=\"previousDecade()\">Previous Decade</button>\n" +
+    "    <button type=\"button\" disabled=\"disabled\">{{yearPicker.decade.start}} - {{yearPicker.decade.end}}</button>\n" +
+    "    <button type=\"button\" ng-click=\"nextDecade()\">Next Decade</button>\n" +
     "  </div>\n" +
     "  <div class=\"kt-date-picker-content\">\n" +
     "    <div class=\"kt-year-picker-cell\"\n" +
     "         ng-repeat=\"year in yearPicker.years\"\n" +
     "         ng-class=\"{'kt-date-picker-selected': isSelected(year), 'kt-date-picker-overflow': isOverflowing(year)}\">\n" +
-    "      <button ng-click=\"selectYear(year)\">{{year}}</button>\n" +
+    "      <button type=\"button\" ng-click=\"selectYear(year)\">{{year}}</button>\n" +
     "    </div>\n" +
     "  </div>\n" +
     "  <div class=\"kt-date-picker-footer\"></div>\n" +
