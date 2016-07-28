@@ -32,8 +32,12 @@
         var startWeek = date.clone().startOf('month').week();
         var endWeek = date.clone().endOf('month').week();
 
-        if (startWeek > endWeek) {
+        if (startWeek > endWeek && startWeek < 10) {
           startWeek = 0;
+        }
+
+        if (startWeek > endWeek && startWeek > 40) {
+          startWeek = startWeek - date.weeksInYear();
         }
 
         return {
