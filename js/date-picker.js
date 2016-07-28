@@ -160,5 +160,22 @@
           });
         }
       }
+    }])
+
+    .directive('ktDatePickerInput', ['$compile', function ($compile) {
+      return {
+        restrict: 'A',
+        scope: {
+          date: '='
+        },
+        link: function (scope, element) {
+          element.bind('focus', function () {
+            var datePicker = angular.element('<kt-date-picker date="date"></kt-date-picker>');
+            $compile(datePicker)(scope);
+            element.parent().after(datePicker);
+            scope.$apply();
+          });
+        }
+      };
     }]);
 })();
