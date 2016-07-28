@@ -20,12 +20,16 @@
             dayHeaders: service.getDayHeaders()
           };
 
-          scope.selectDate = function (date) {
-            var parentElement = scope.$parent.hasOwnProperty('element') ? scope.$parent.element : undefined;
-            scope.date.year(date.year()).month(date.month()).date(date.date());
-            if (parentElement && parentElement.prop('tagName').toLowerCase() === 'kt-date-time-picker') {
-              scope.$parent.$broadcast('datePickerSelect');
+          scope.$watch('date', function (date) {
+            if (!date) {
+              return;
             }
+
+            resetDayPicker(date);
+          }, true);
+
+          scope.selectDate = function (date) {
+            scope.date.year(date.year()).month(date.month()).date(date.date());
           };
 
           scope.previousMonth = function () {
@@ -65,6 +69,10 @@
           });
 
           function resetDayPicker(date) {
+            if (scope.dayPicker.month === date.month() && scope.dayPicker.year === date.year()) {
+              return;
+            }
+
             scope.dayPicker.month = date.month();
             scope.dayPicker.year = date.year();
             scope.dayPicker.weeks = service.getWeeksInMonth(scope.dayPicker.year, scope.dayPicker.month);

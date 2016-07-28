@@ -162,19 +162,93 @@
       }
     }])
 
-    .directive('ktDatePickerInput', ['$compile', function ($compile) {
+    .directive('ktDatePickerInput', ['$timeout', function ($timeout) {
+      function findParentByTag(el, tag) {
+        while (el.parentNode) {
+          el = el.parentNode;
+          if (el.tagName === tag)
+            return el;
+        }
+        return null;
+      }
+
+      function findParentByClass(el, className) {
+        while (el.parentNode) {
+          el = el.parentNode;
+          if ((' ' + el.className + ' ').indexOf(' ' + className + ' ') > -1) {
+            return el;
+          }
+        }
+        return null;
+      }
+
+      function findParentElement(element, selector) {
+        switch (selector.indexOf('.')) {
+          case 0: return findParentByClass(element, selector.substring(1));
+          default: return findParentByTag(element, selector.toUpperCase());
+        }
+      }
+
       return {
-        restrict: 'A',
+        restrict: 'E',
+        template:
+        '<input type="text" ng-model="datePickerInput.dateString" ng-change="dateStringChanged()" ng-click="showDatePicker()">' +
+        '<kt-date-picker date="$parent.date" ng-if="datePickerInput.visible"></kt-date-picker>',
         scope: {
-          date: '='
+          date: '=',
+          format: '@'
         },
-        link: function (scope, element) {
-          element.bind('focus', function () {
-            var datePicker = angular.element('<kt-date-picker date="date"></kt-date-picker>');
-            $compile(datePicker)(scope);
-            element.parent().after(datePicker);
-            scope.$apply();
-          });
+        link: function (scope) {
+          scope.datePickerInput = {
+            dateString: '',
+            visible: false
+          };
+
+          var listenerIgnore = [
+            'kt-date-picker-input',
+            'kt-day-picker',
+            'kt-month-picker',
+            'kt-year-picker',
+            '.kt-day-picker-row'
+          ];
+
+          document.addEventListener('click', function (e) {
+            e = e || window.event;
+            var target = angular.element(e.target || e.srcElement);
+            var ignore;
+            listenerIgnore.forEach(function (selector) {
+              if (findParentElement(target[0], selector)) {
+                ignore = true;
+              }
+            });
+
+            if (ignore) {
+              return;
+            }
+
+            $timeout(function () {
+              scope.datePickerInput.visible = false;
+            });
+          }, false);
+
+          scope.showDatePicker = function () {
+            scope.datePickerInput.visible = true;
+          };
+
+          scope.dateStringChanged = function () {
+              var date = moment(scope.datePickerInput.dateString, scope.format, true);
+              if (date.isValid()) {
+                scope.date.year(date.year()).month(date.month()).date(date.date());
+              }
+          };
+
+          scope.$watch('date', function (date) {
+            if (!date) {
+              return;
+            }
+
+            scope.datePickerInput.dateString = date.format(scope.format);
+          }, true);
         }
       };
     }]);

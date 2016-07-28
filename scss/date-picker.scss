@@ -2,6 +2,7 @@
 
 $kt-date-picker-font-family : 'Roboto', sans-serif;
 $kt-date-picker-width : 28rem;
+$kt-date-picker-padding : 0.5rem;
 $kt-date-picker-cell-font-size : 0.8em;
 $kt-date-picker-cell-padding : 0.25rem;
 $kt-date-picker-cell-size : 3rem;
@@ -14,8 +15,13 @@ $kt-date-picker-active-date-background : #3f51b5;
 $kt-date-picker-content-height : 7 * $kt-date-picker-cell-size;
 $kt-date-picker-height : $kt-date-picker-header-height + $kt-date-picker-content-height + $kt-date-picker-footer-height;
 $kt-date-picker-color : #222222;
+$kt-date-picker-background: #ffffff;
 $kt-date-picker-muted-opacity : 0.4;
 $kt-date-picker-overflow-opacity : 0.4;
+$kt-date-picker-border : 1px solid $kt-date-picker-active-date-background;
+$kt-date-picker-shadow : 0 1px 5px 1px $kt-date-picker-active-date-background;
+
+$kt-time-picker-width: 15rem;
 
 @mixin kt-date-picker-cell($display) {
   display        : $display;
@@ -31,7 +37,7 @@ $kt-date-picker-overflow-opacity : 0.4;
   width    : 100%;
   height   : 100%;
 
-  &::after {
+  &::before {
     content       : "";
     height        : $kt-date-picker-cell-size - (2 * $kt-date-picker-cell-padding);
     position      : absolute;
@@ -65,7 +71,7 @@ $kt-date-picker-overflow-opacity : 0.4;
 .kt-date-picker-selected button {
   color : $kt-date-picker-active-date-color;
 
-  &::after {
+  &::before {
     background : $kt-date-picker-active-date-background;
   }
 }
@@ -99,6 +105,7 @@ kt-date-picker, kt-day-picker, kt-month-picker, kt-year-picker, kt-time-picker {
   display     : block;
   width       : $kt-date-picker-width;
   font-family : $kt-date-picker-font-family;
+  padding     : $kt-date-picker-padding;
 
   button {
     background  : transparent;
@@ -111,6 +118,10 @@ kt-date-picker, kt-day-picker, kt-month-picker, kt-year-picker, kt-time-picker {
 }
 
 kt-date-picker {
+  kt-day-picker, kt-month-picker, kt-year-picker {
+    width: 100%;
+  }
+
   .kt-date-picker-content {
     height : $kt-date-picker-content-height;
   }
@@ -172,6 +183,8 @@ kt-year-picker {
 }
 
 kt-time-picker {
+  width: $kt-time-picker-width;
+
   .kt-date-picker-header {
     div {
       display    : table-cell;
@@ -203,5 +216,25 @@ kt-time-picker {
     button {
       @include kt-date-picker-cell-button(circle);
     }
+  }
+}
+
+kt-date-picker-input {
+  kt-date-picker {
+    background : $kt-date-picker-background;
+    border     : 1px solid $kt-date-picker-color;
+    box-shadow : $kt-date-picker-shadow;
+    position   : absolute;
+    z-index    : 0;
+  }
+}
+
+kt-time-picker-input {
+  kt-time-picker {
+    background : $kt-date-picker-background;
+    border     : 1px solid $kt-date-picker-color;
+    box-shadow : $kt-date-picker-shadow;
+    position   : absolute;
+    z-index    : 0;
   }
 }
