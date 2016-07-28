@@ -64,7 +64,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'kt-date-picker.js': ['js/*.js', 'js/template/template-cache.js']
+          'date-picker.js': ['js/*.js', 'js/template/template-cache.js']
         }
       }
     }
