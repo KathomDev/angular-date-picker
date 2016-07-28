@@ -74,10 +74,11 @@ $kt-date-picker-overflow-opacity : 0.4;
   display : table;
   width   : 100%;
 
-  button {
+  button, div {
     display        : table-cell;
     vertical-align : middle;
     height         : $kt-date-picker-header-height;
+    font-size      : $kt-date-picker-header-font-size;
   }
 
   button:first-of-type, button:last-of-type {
@@ -87,7 +88,6 @@ $kt-date-picker-overflow-opacity : 0.4;
 
   button:nth-of-type(2) {
     width     : 60%;
-    font-size : $kt-date-picker-header-font-size;
   }
 }
 
@@ -95,7 +95,7 @@ $kt-date-picker-overflow-opacity : 0.4;
   height: $kt-date-picker-footer-height;
 }
 
-kt-date-picker, kt-day-picker, kt-month-picker, kt-year-picker {
+kt-date-picker, kt-day-picker, kt-month-picker, kt-year-picker, kt-time-picker {
   display     : block;
   width       : $kt-date-picker-width;
   font-family : $kt-date-picker-font-family;
@@ -167,6 +167,41 @@ kt-year-picker {
 
     button {
       @include kt-date-picker-cell-button(rectangle);
+    }
+  }
+}
+
+kt-time-picker {
+  .kt-date-picker-header {
+    div {
+      display    : table-cell;
+      width      : 50%;
+      text-align : center;
+    }
+  }
+
+  .kt-date-picker-content {
+    display : table;
+    width   : 100%;
+
+    .kt-time-picker-outer {
+      display  : table-cell;
+      width    : 50%;
+      overflow : hidden;
+    }
+
+    .kt-time-picker-inner {
+      height     : $kt-date-picker-content-height;
+      overflow-y : scroll;
+    }
+  }
+
+  .kt-time-picker-cell {
+    @include kt-date-picker-cell(inline-block);
+    width : 100%;
+
+    button {
+      @include kt-date-picker-cell-button(circle);
     }
   }
 }

@@ -1,7 +1,5 @@
 module.exports = function(grunt) {
 
-  var Promise = require('es6-promise').Promise;
-
   // Project configuration.
   grunt.initConfig({
     sass: {
