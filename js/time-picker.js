@@ -32,7 +32,7 @@
 
       return {
         restrict: 'E',
-        templateUrl: 'html/time-picker.html',
+        templateUrl: 'kt-time-picker.html',
         scope: {
           date: '='
         },

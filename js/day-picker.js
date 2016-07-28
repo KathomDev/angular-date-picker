@@ -5,17 +5,10 @@
 
     .module('kt.components.datePicker')
 
-    .directive('test', [function () {
-      return {
-        restrict: 'E',
-        template: '<div>test2</div>'
-      };
-    }])
-
     .directive('ktDayPicker', ['ktDatePickerSvc', function (service) {
       return {
         restrict: 'E',
-        templateUrl: 'html/day-picker.html',
+        templateUrl: 'kt-day-picker.html',
         scope: {
           date: '='
         },

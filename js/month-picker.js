@@ -24,7 +24,7 @@
         scope: {
           date: '='
         },
-        templateUrl: 'html/month-picker.html',
+        templateUrl: 'kt-month-picker.html',
         link: function (scope) {
           scope.monthPicker = {
             year: scope.date.year(),

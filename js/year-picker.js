@@ -28,7 +28,7 @@
 
       return {
         restrict: 'E',
-        templateUrl: 'html/year-picker.html',
+        templateUrl: 'kt-year-picker.html',
         scope: {
           date: '='
         },

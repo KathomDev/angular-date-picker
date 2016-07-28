@@ -10,6 +10,7 @@
     "autoprefixer": "^6.3.7",
     "grunt": "^1.0.1",
     "grunt-contrib-watch": "^1.0.0",
+    "grunt-html2js": "^0.3.6",
     "grunt-postcss": "^0.8.0",
     "grunt-sass": "^1.2.0",
     "jasmine-core": "^2.4.1",
