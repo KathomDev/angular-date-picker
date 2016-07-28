@@ -29,7 +29,7 @@
 
           scope.selectDate = function (date) {
             var parentElement = scope.$parent.hasOwnProperty('element') ? scope.$parent.element : undefined;
-            scope.date.year(scope.dayPicker.year).month(scope.dayPicker.month).date(date.date());
+            scope.date.year(date.year()).month(date.month()).date(date.date());
             if (parentElement && parentElement.prop('tagName').toLowerCase() === 'kt-date-time-picker') {
               scope.$parent.$broadcast('datePickerSelect');
             }
